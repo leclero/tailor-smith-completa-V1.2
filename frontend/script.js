@@ -1,10 +1,10 @@
-<<<<<<< HEAD
+//<<<<<<< HEAD
 // script.js
 // Carga la configuración del backend
 // Asegúrate de tener <script src="config.js"></script> antes de este archivo en index.html
 =======
-const backendURL = '192.168.0.141:3000';  // Cambia esto por la IP real de tu backend
->>>>>>> b8239bad5b2b3ca9c3151be86a38dd262cdb7526
+const backendURL = "config.js";  // Cambia esto por la IP real de tu backend
+//>>>>>>> b8239bad5b2b3ca9c3151be86a38dd262cdb7526
 
 let elementos = [];
 let carrito = [];
