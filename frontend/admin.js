@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-// admin.js
-// Usa config.js para el backendURL
-=======
-const backendURL = '192.168.0.141:3000';  // Cambia esto por la IP real del backend
->>>>>>> b8239bad5b2b3ca9c3151be86a38dd262cdb7526
+const backendURL = 'postgresql://neondb_owner:npg_4KMdPHVWh8pa@ep-falling-water-acglm66b-pooler.sa-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require';  // Cambia esto por la IP real del backend
 
 function login() {
 const usuario = document.getElementById("usuario").value;
