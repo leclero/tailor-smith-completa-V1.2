@@ -1,0 +1,17 @@
+{
+  "name": "tailor-smith-frontend",
+  "version": "1.0.0",
+  "description": "Frontend Tailor Smith con Tailwind",
+  "main": "index.html",
+  "scripts": {
+    "build:css": "tailwindcss -i ./input.css -o ./style.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.4.1"
+  }
+}
