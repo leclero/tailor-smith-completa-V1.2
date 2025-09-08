@@ -1,5 +1,3 @@
-const backendURL = "config.js";  // Cambia esto por la IP real del backend
-
 function login() {
 const usuario = document.getElementById("usuario").value;
 const clave = document.getElementById("clave").value;
