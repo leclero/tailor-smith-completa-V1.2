@@ -2,7 +2,7 @@
 // script.js
 // Carga la configuración del backend
 // Asegúrate de tener <script src="config.js"></script> antes de este archivo en index.html
-=======
+//=======
 const backendURL = "config.js";  // Cambia esto por la IP real de tu backend
 //>>>>>>> b8239bad5b2b3ca9c3151be86a38dd262cdb7526
 
@@ -35,7 +35,7 @@ productos.forEach((prod, index) => {
         <h5 class="font-bold">${prod.nombre}</h5>
         <p class="text-gray-700">$${prod.precio}</p>
         <button class="bg-blue-600 text-white px-3 py-1 rounded mt-2"
-            onclick="agregarAlCarrito(${prod.id})">Agregar</button>
+        onclick="agregarAlCarrito(${prod.id})">Agregar</button>
         </div>
     </div>`;
     contenedor.appendChild(div);
