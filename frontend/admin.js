@@ -17,14 +17,18 @@ function login() {
   }
 }
 
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Enter" && document.getElementById("login-section").style.display !== "none") {
+// Permitir login con tecla Enter
+document.addEventListener("keydown", (event) => {
+  if (
+    event.key === "Enter" &&
+    document.getElementById("login-section").style.display !== "none"
+  ) {
     login();
   }
 });
 
 // ===============================
-// 🔹 Subida a Cloudinary
+// 🔹 Subida de archivos
 // ===============================
 function subirArchivo() {
   const archivo = document.getElementById("input-archivo").files[0];
@@ -38,8 +42,8 @@ function subirArchivo() {
 function manejarDrop(event) {
   event.preventDefault();
   const archivos = event.dataTransfer.files;
-  for (let archivo of archivos) {
-    enviarArchivo(archivo);
+  for (let i = 0; i < archivos.length; i++) {
+    enviarArchivo(archivos[i]);
   }
 }
 
@@ -48,13 +52,14 @@ function enviarArchivo(archivo) {
   formData.append("archivo", archivo);
 
   axios.post(`${backendURL}/api/upload`, formData).then(() => {
-    document.getElementById("mensaje").textContent = "✅ Archivo subido correctamente.";
+    document.getElementById("mensaje").textContent =
+      "✅ Archivo subido correctamente.";
     cargarElementos();
   });
 }
 
 // ===============================
-// 🔹 Render de Productos/Videos
+// 🔹 Cargar y renderizar elementos
 // ===============================
 function cargarElementos() {
   axios.get(`${backendURL}/api/elementos`).then((res) => {
@@ -75,7 +80,8 @@ function renderizarElementos() {
         : `<img src="${elem.archivo}" class="w-full rounded mb-2">`;
 
     const div = document.createElement("div");
-    div.className = "p-4 border rounded bg-white shadow space-y-2 flex flex-col";
+    div.className =
+      "p-4 border rounded bg-white shadow space-y-2 flex flex-col";
 
     div.innerHTML = `
       ${media}
@@ -100,11 +106,12 @@ function renderizarElementos() {
 }
 
 // ===============================
-// 🔹 Guardar Cambios
+// 🔹 Guardar catálogo
 // ===============================
 function guardarCambios() {
   axios.put(`${backendURL}/api/elementos`, elementos).then(() => {
-    document.getElementById("mensaje").textContent = "💾 Cambios guardados.";
+    document.getElementById("mensaje").textContent =
+      "💾 Catálogo guardado correctamente.";
   });
 }
 
