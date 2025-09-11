@@ -1,6 +1,15 @@
+// ===============================
+// 🔹 URL del Backend (una sola vez)
+// ===============================
+const backendURL = "http://localhost:3000";
+// ⚠️ Cambia esto por tu URL real (Render, Neon, etc.)
+
 let elementos = [];
 let carrito = [];
 
+// ===============================
+// 🔹 Cargar elementos desde el backend
+// ===============================
 function cargarElementos() {
   axios.get(`${backendURL}/api/elementos`).then((res) => {
     elementos = res.data;
@@ -9,6 +18,9 @@ function cargarElementos() {
   });
 }
 
+// ===============================
+// 🔹 Renderizar productos en carrusel
+// ===============================
 function renderizarProductos() {
   const contenedor = document.getElementById("carousel-inner");
   contenedor.innerHTML = "";
@@ -21,8 +33,8 @@ function renderizarProductos() {
     div.innerHTML = `
       <img src="${prod.archivo}" class="d-block mx-auto rounded shadow" style="max-height: 400px;">
       <div class="carousel-caption bg-dark bg-opacity-50 p-2 rounded">
-        <h5>${prod.nombre}</h5>
-        <p>$${prod.precio}</p>
+        <h5>${prod.nombre || "Nuevo elemento"}</h5>
+        <p>$${prod.precio || 0}</p>
         <button class="btn btn-primary" onclick="agregarAlCarrito(${prod.id})">Agregar</button>
       </div>
     `;
@@ -30,6 +42,9 @@ function renderizarProductos() {
   });
 }
 
+// ===============================
+// 🔹 Renderizar videos
+// ===============================
 function renderizarVideos() {
   const contenedor = document.getElementById("galeria-videos");
   contenedor.innerHTML = "";
@@ -84,9 +99,7 @@ function renderizarCarrito() {
     contenedor.appendChild(div);
   });
 
-  document.getElementById("carrito-total").textContent = `Total: $${total.toFixed(
-    2
-  )}`;
+  document.getElementById("carrito-total").textContent = `Total: $${total.toFixed(2)}`;
 }
 
 function cambiarCantidad(index, delta) {
@@ -102,6 +115,9 @@ function eliminarDelCarrito(index) {
   renderizarCarrito();
 }
 
+// ===============================
+// 🔹 Finalizar pedido (WhatsApp)
+// ===============================
 document.getElementById("btn-finalizar").addEventListener("click", () => {
   if (carrito.length === 0) {
     alert("El carrito está vacío.");
@@ -112,15 +128,13 @@ document.getElementById("btn-finalizar").addEventListener("click", () => {
   carrito.forEach((item) => {
     mensaje += `${item.nombre} - $${item.precio} x ${item.cantidad}\n`;
   });
-  mensaje += `\nTotal: $${document
-    .getElementById("carrito-total")
-    .textContent.replace("Total: ", "")}`;
+  mensaje += `\nTotal: ${document.getElementById("carrito-total").textContent}`;
 
-  const whatsappURL = `https://wa.me/5491168915378?text=${encodeURIComponent(
-    mensaje
-  )}`;
+  const whatsappURL = `https://wa.me/5491168915378?text=${encodeURIComponent(mensaje)}`;
   window.open(whatsappURL, "_blank");
 });
 
-// Inicializar
+// ===============================
+// 🔹 Inicializar
+// ===============================
 cargarElementos();

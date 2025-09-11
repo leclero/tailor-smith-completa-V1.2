@@ -1,3 +1,9 @@
+// ===============================
+// 🔹 URL del Backend
+// ===============================
+const backendURL = "http://localhost:3000"; 
+// ⚠️ Si usas otra PC o deploy, cambia aquí (ej: https://miapp.onrender.com)
+
 let elementos = [];
 
 // ===============================
@@ -13,7 +19,7 @@ function login() {
     cargarElementos();
   } else {
     document.getElementById("mensaje-login").textContent =
-      "Usuario o contraseña incorrectos.";
+      "❌ Usuario o contraseña incorrectos.";
   }
 }
 
@@ -87,15 +93,15 @@ function renderizarElementos() {
       ${media}
       <label><strong>Nombre o Descripción:</strong></label>
       <input type="text" value="${elem.nombre}" 
-             class="border p-2 w-full rounded"
-             onchange="elementos[${index}].nombre = this.value">
+            class="border p-2 w-full rounded"
+            onchange="elementos[${index}].nombre = this.value">
 
       <label><strong>Precio o Valor:</strong></label>
       <input type="number" value="${elem.precio}" 
-             class="border p-2 w-full rounded"
-             onchange="elementos[${index}].precio = parseFloat(this.value)">
+            class="border p-2 w-full rounded"
+            onchange="elementos[${index}].precio = parseFloat(this.value)">
 
-      <button onclick="elementos.splice(${index},1); guardarCambios(); renderizarElementos()"
+      <button onclick="eliminarElemento(${index})"
               class="bg-red-600 text-white px-3 py-1 rounded mt-2">
         ❌ Eliminar
       </button>
@@ -103,6 +109,15 @@ function renderizarElementos() {
 
     contenedor.appendChild(div);
   });
+}
+
+// ===============================
+// 🔹 Eliminar producto
+// ===============================
+function eliminarElemento(index) {
+  elementos.splice(index, 1);
+  guardarCambios();
+  renderizarElementos();
 }
 
 // ===============================
