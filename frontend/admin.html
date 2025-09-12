@@ -1,72 +1,52 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Admin | Tailor Smith</title>
-<link rel="stylesheet" href="style.css">
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <meta charset="UTF-8">
+  <title>Admin | Tailor Smith</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
-<body class="bg-gray-100 font-sans">
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
 
-<!-- 🔹 Sección de Login -->
-<div id="login-section" class="flex flex-col items-center justify-center h-screen">
-<div class="bg-white shadow-lg rounded p-8 w-96">
-<h1 class="text-2xl font-bold mb-4 text-center">🔐 Acceso Administrador</h1>
-<input type="text" id="usuario" placeholder="Usuario"
-        class="border p-2 w-full mb-3 rounded" />
-<input type="password" id="clave" placeholder="Contraseña"
-        class="border p-2 w-full mb-3 rounded" />
-<button onclick="login()" id="btn-login"
-        class="bg-blue-600 text-white px-4 py-2 rounded w-full">
-        Ingresar
-</button>
-<p id="mensaje-login" class="text-red-500 mt-3 text-center"></p>
-<!-- 🔹 Botón volver a la tienda -->
-<button onclick="window.location.href='index.html'"
-        class="mt-4 bg-gray-500 text-white px-4 py-2 rounded w-full">
-        🔙 Volver a la tienda
-</button>
-</div>
-</div>
+  <!-- Login -->
+  <div id="login-section" class="bg-white p-8 rounded shadow w-96">
+    <h1 class="text-2xl font-bold mb-4 text-center">🔐 Acceso Administrador</h1>
+    <input type="text" id="usuario" placeholder="Usuario" class="w-full mb-2 p-2 border rounded">
+    <input type="password" id="clave" placeholder="Contraseña" class="w-full mb-2 p-2 border rounded">
+    <button onclick="login()" class="bg-blue-600 text-white px-4 py-2 rounded w-full">Ingresar</button>
+    <p id="mensaje-login" class="text-red-600 mt-2"></p>
+    <a href="index.html" class="block mt-4 text-blue-600 text-center">⬅ Volver a la tienda</a>
+  </div>
 
-<!-- 🔹 Panel de Administración -->
-<div id="admin-panel" class="p-8 hidden">
-<h1 class="text-3xl font-bold mb-6">Gestión de Productos y Videos</h1>
+  <!-- Panel Admin -->
+  <div id="admin-panel" style="display:none;" class="container mx-auto p-6">
+    <h1 class="text-2xl font-bold mb-4">Gestión de Productos y Videos</h1>
 
-<!-- Subida de archivos -->
-<section id="zona-subida"
-        class="border-2 border-dashed border-gray-400 p-6 mb-6 rounded text-center bg-white"
-        ondrop="manejarDrop(event)" ondragover="event.preventDefault()">
-<p class="mb-4">Arrastra aquí imágenes o videos, o usa el botón.</p>
-<input type="file" id="input-archivo" accept="image/*,video/mp4"
-        class="mb-4 block w-full" />
-<button onclick="subirArchivo()" 
-        class="bg-green-600 text-white px-4 py-2 rounded">
-        Subir Archivo
-</button>
-</section>
+    <!-- Subida -->
+    <section id="zona-subida" 
+             ondrop="manejarDrop(event)" 
+             ondragover="event.preventDefault()" 
+             class="border-2 border-dashed p-6 text-center rounded mb-6">
+      <p>Arrastra aquí imágenes o videos, o usa el botón.</p>
+      <input type="file" id="input-archivo" accept="image/*,video/mp4" class="mt-2">
+      <button onclick="subirArchivo()" class="bg-green-600 text-white px-4 py-2 rounded mt-2">Subir Archivo</button>
+    </section>
 
-<!-- Lista de elementos -->
-<section class="bg-white p-6 rounded shadow">
-<h2 class="text-2xl font-semibold mb-4">Elementos Cargados</h2>
-<div id="lista-elementos" class="space-y-4"></div>
-<button onclick="guardarCambios()" 
-        class="mt-6 bg-blue-600 text-white px-4 py-2 rounded">
-        💾 Guardar Cambios
-</button>
-</section>
+    <!-- Lista -->
+    <section>
+      <h2 class="text-xl font-bold mb-2">Elementos Cargados</h2>
+      <div id="lista-elementos"></div>
+      <button onclick="guardarCambios()" class="bg-blue-600 text-white px-4 py-2 rounded mt-4">💾 Guardar Cambios</button>
+    </section>
 
-<!-- Botón salir -->
-<button onclick="salirAdmin()" 
-        class="mt-6 bg-red-600 text-white px-4 py-2 rounded">
-🔙 Salir y volver a la tienda
-</button>
+    <!-- Salir -->
+    <button onclick="salirAdmin()" class="bg-red-600 text-white px-4 py-2 rounded mt-6">🔙 Volver a la tienda</button>
 
-<p id="mensaje" class="mt-4 text-green-600"></p>
-</div>
+    <p id="mensaje" class="mt-4 text-green-600"></p>
+  </div>
 
-<!-- Scripts -->
-<script src="config.js"></script>
-<script src="admin.js"></script>
+  <!-- Scripts -->
+  <script src="config.js"></script>
+  <script src="admin.js"></script>
 </body>
 </html>

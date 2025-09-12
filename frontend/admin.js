@@ -1,9 +1,3 @@
-// ===============================
-// 🔹 URL del Backend
-// ===============================
-const backendURL = "http://localhost:3000"; 
-// ⚠️ Si usas otra PC o deploy, cambia aquí (ej: https://miapp.onrender.com)
-
 let elementos = [];
 
 // ===============================
@@ -19,7 +13,7 @@ function login() {
     cargarElementos();
   } else {
     document.getElementById("mensaje-login").textContent =
-      "❌ Usuario o contraseña incorrectos.";
+      "Usuario o contraseña incorrectos.";
   }
 }
 
@@ -101,7 +95,7 @@ function renderizarElementos() {
             class="border p-2 w-full rounded"
             onchange="elementos[${index}].precio = parseFloat(this.value)">
 
-      <button onclick="eliminarElemento(${index})"
+      <button onclick="elementos.splice(${index},1); guardarCambios(); renderizarElementos()"
               class="bg-red-600 text-white px-3 py-1 rounded mt-2">
         ❌ Eliminar
       </button>
@@ -109,15 +103,6 @@ function renderizarElementos() {
 
     contenedor.appendChild(div);
   });
-}
-
-// ===============================
-// 🔹 Eliminar producto
-// ===============================
-function eliminarElemento(index) {
-  elementos.splice(index, 1);
-  guardarCambios();
-  renderizarElementos();
 }
 
 // ===============================
@@ -136,3 +121,12 @@ function guardarCambios() {
 function salirAdmin() {
   window.location.href = "index.html";
 }
+
+// ===============================
+// 🔹 Exponer funciones al scope global
+// ===============================
+window.login = login;
+window.subirArchivo = subirArchivo;
+window.manejarDrop = manejarDrop;
+window.guardarCambios = guardarCambios;
+window.salirAdmin = salirAdmin;
