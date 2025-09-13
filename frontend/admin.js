@@ -51,10 +51,14 @@ function enviarArchivo(archivo) {
   const formData = new FormData();
   formData.append("archivo", archivo);
 
-  axios.post(`${backendURL}/api/upload`, formData).then(() => {
+  axios.post(`${backendURL}/api/upload`, formData, {
+    headers: { "Content-Type": "multipart/form-data" }
+  }).then(() => {
     document.getElementById("mensaje").textContent =
       "✅ Archivo subido correctamente.";
     cargarElementos();
+  }).catch(err => {
+    console.error("❌ Error subiendo archivo:", err);
   });
 }
 
@@ -121,12 +125,3 @@ function guardarCambios() {
 function salirAdmin() {
   window.location.href = "index.html";
 }
-
-// ===============================
-// 🔹 Exponer funciones al scope global
-// ===============================
-window.login = login;
-window.subirArchivo = subirArchivo;
-window.manejarDrop = manejarDrop;
-window.guardarCambios = guardarCambios;
-window.salirAdmin = salirAdmin;
