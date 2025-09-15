@@ -1,22 +1,14 @@
 let elementos = [];
 let carrito = [];
 
-// ===============================
-// 🔹 Cargar elementos desde backend
-// ===============================
 function cargarElementos() {
   axios.get(`${backendURL}/api/elementos`).then((res) => {
     elementos = res.data;
     renderizarProductos();
     renderizarVideos();
-  }).catch(err => {
-    console.error("❌ Error cargando elementos:", err);
   });
 }
 
-// ===============================
-// 🔹 Renderizar productos (imágenes)
-// ===============================
 function renderizarProductos() {
   const contenedor = document.getElementById("carousel-inner");
   contenedor.innerHTML = "";
@@ -27,10 +19,7 @@ function renderizarProductos() {
     const div = document.createElement("div");
     div.className = "carousel-item" + (index === 0 ? " active" : "");
     div.innerHTML = `
-      <img src="${prod.archivo}" 
-           alt="${prod.nombre}" 
-           class="d-block mx-auto rounded shadow" 
-           style="max-height: 400px;">
+      <img src="${prod.archivo}" class="d-block mx-auto rounded shadow" style="max-height: 400px;">
       <div class="carousel-caption bg-dark bg-opacity-50 p-2 rounded">
         <h5>${prod.nombre}</h5>
         <p>$${prod.precio}</p>
@@ -41,9 +30,6 @@ function renderizarProductos() {
   });
 }
 
-// ===============================
-// 🔹 Renderizar videos
-// ===============================
 function renderizarVideos() {
   const contenedor = document.getElementById("galeria-videos");
   contenedor.innerHTML = "";
@@ -98,7 +84,9 @@ function renderizarCarrito() {
     contenedor.appendChild(div);
   });
 
-  document.getElementById("carrito-total").textContent = `Total: $${total.toFixed(2)}`;
+  document.getElementById("carrito-total").textContent = `Total: $${total.toFixed(
+    2
+  )}`;
 }
 
 function cambiarCantidad(index, delta) {
@@ -114,9 +102,6 @@ function eliminarDelCarrito(index) {
   renderizarCarrito();
 }
 
-// ===============================
-// 🔹 Enviar pedido a WhatsApp
-// ===============================
 document.getElementById("btn-finalizar").addEventListener("click", () => {
   if (carrito.length === 0) {
     alert("El carrito está vacío.");
@@ -131,11 +116,11 @@ document.getElementById("btn-finalizar").addEventListener("click", () => {
     .getElementById("carrito-total")
     .textContent.replace("Total: ", "")}`;
 
-  const whatsappURL = `https://wa.me/5491168915378?text=${encodeURIComponent(mensaje)}`;
+  const whatsappURL = `https://wa.me/5491168915378?text=${encodeURIComponent(
+    mensaje
+  )}`;
   window.open(whatsappURL, "_blank");
 });
 
-// ===============================
-// 🔹 Inicializar
-// ===============================
+// Inicializar
 cargarElementos();
