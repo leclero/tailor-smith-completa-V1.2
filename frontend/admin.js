@@ -51,14 +51,20 @@ function enviarArchivo(archivo) {
   const formData = new FormData();
   formData.append("archivo", archivo);
 
-  axios.post(`${backendURL}/api/upload`, formData, {
-    headers: { "Content-Type": "multipart/form-data" }
-  }).then(() => {
+  axios.post(`${backendURL}/api/upload`, formData).then((res) => {
     document.getElementById("mensaje").textContent =
       "✅ Archivo subido correctamente.";
-    cargarElementos();
-  }).catch(err => {
-    console.error("❌ Error subiendo archivo:", err);
+
+    elementos.push({
+      id: res.data.id,
+      tipo: res.data.tipo,
+      archivo: res.data.archivo,
+      nombre: "Nuevo elemento",
+      precio: 0,
+    });
+
+    guardarCambios();
+    renderizarElementos();
   });
 }
 
